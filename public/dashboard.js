@@ -5,6 +5,42 @@ $(document).ready(() => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+  $('.js-pause-queue').on('click', function(e) {
+    e.preventDefault();
+    $(this).prop('disabled', true);
+
+    const queueName = $(this).data('queue-name');
+    const queueHost = $(this).data('queue-host');
+
+    $.ajax({
+      method: 'POST',
+      url: `${basePath}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/pause`
+    }).done(() => {
+      window.location.reload();
+    }).fail((jqXHR) => {
+      window.alert(`Failed to pause, check console for error.`);
+      console.error(jqXHR.responseText);
+    }); 
+  });
+
+  $('.js-resume-queue').on('click', function(e) {
+    e.preventDefault();
+    $(this).prop('disabled', true);
+
+    const queueName = $(this).data('queue-name');
+    const queueHost = $(this).data('queue-host');
+
+    $.ajax({
+      method: 'POST',
+      url: `${basePath}/api/queue/${encodeURIComponent(queueHost)}/${encodeURIComponent(queueName)}/resume`
+    }).done(() => {
+      window.location.reload();
+    }).fail((jqXHR) => {
+      window.alert(`Failed to resume, check console for error.`);
+      console.error(jqXHR.responseText);
+    }); 
+  });
+
   // Set up individual "retry job" handler
   $('.js-retry-job').on('click', function(e) {
     e.preventDefault();
