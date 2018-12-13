@@ -1,4 +1,12 @@
-<h2>Queue <code>{{ queueHost }}/{{ queueName }}</code></h2>
+<h2>
+  Queue <code>{{ queueHost }}/{{ queueName }}</code>
+  <button class="btn btn-default js-pause-queue" data-queue-host="{{ queueHost }}" data-queue-name="{{ queueName }}">
+    Pause
+  </button>
+  <button class="btn btn-success js-resume-queue" data-queue-host="{{ queueHost }}" data-queue-name="{{ queueName }}">
+    Resume
+  </button>  
+</h2>
 
 <h3>Job Types</h3>
 <div class="row">
